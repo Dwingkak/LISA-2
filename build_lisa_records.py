@@ -63,13 +63,15 @@ def main(_):
         # initialize Tensorflow writer and initialize 
         # the total number of examples written to file
         print("[INFO] processing '{}'...".format(dType))
-        writer = tf.python_io.TFRecordWriter(outputPath)
+        # writer = tf.python_io.TFRecordWriter(outputPath)
+        writer = tf.io.TFRecordWriter(outputPath)
         total = 0
         
         # loop over the keys in the current set
         for k in keys:
             # load the input image from disks as a Tensorflow object
-            encoded = tf.gfile.GFile(k, "rb").read()
+            # encoded = tf.gfile.GFile(k, "rb").read()
+            encoded = tf.io.gfile.GFile(k, "rb").read()
             encoded = bytes(encoded)
             
             # load the image from disk again as PIL object
@@ -124,7 +126,8 @@ def main(_):
         
 # check to see if the main thread should be started
 if __name__ == "__main__":
-    tf.app.run()
+    # tf.app.run()
+    tf.compat.v1.app.run()
             
     
         
